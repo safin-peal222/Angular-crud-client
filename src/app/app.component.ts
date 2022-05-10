@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { UserDataService } from './user-data.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,15 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'fetch-data';
+  users: any;
+  constructor(private userData: UserDataService) {
+    this.userData.users().subscribe((data) => {
+      this.users = data;
+    })
+  }
+  getUser(data: any) {
+    this.userData.saveUser(data).subscribe((result) => {
+      console.log(result);
+    })
+  }
 }
