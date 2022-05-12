@@ -12,6 +12,10 @@ export class UserDataService {
     return this.http.get(this.url);
   }
   saveUser(data: any) {
-    return this.http.post(this.url, data)
+    return this.http.post(this.url, data);
+  }
+
+  deleteUser(id: number) {
+    return this.http.delete(`http://localhost:5000/users/${id}`);
   }
 }

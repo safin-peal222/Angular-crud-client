@@ -9,14 +9,36 @@ import { UserDataService } from './user-data.service';
 export class AppComponent {
   title = 'fetch-data';
   users: any;
+  remainingUsers: any;
   constructor(private userData: UserDataService) {
+    this.getAllData();
+  }
+
+  getAllData() {
     this.userData.users().subscribe((data) => {
       this.users = data;
     })
   }
+
+  ngOnInit(): void {
+    console.log("calling ngOnInit()::::");
+    this.users();
+  }
   getUser(data: any) {
     this.userData.saveUser(data).subscribe((result) => {
-      console.log(result);
+      console.log(this.users);
+    })
+  }
+
+
+
+  onDelete(id: number) {
+
+    this.userData.deleteUser(id).subscribe(res => {
+
+      this.remainingUsers = this.users.filter((user: any) => user._id !== id);
+
+      this.users = this.remainingUsers;
     })
   }
 }

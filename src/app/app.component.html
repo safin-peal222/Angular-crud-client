@@ -6,9 +6,16 @@
 
 <input type="text" ngModel name="password" placeholder="Enter YOur Password">
 
-<button type="submit">Add New Person</button>
-
-
-
-
+<button (click)="getAllData()" type="submit">Add New Person</button>
 </form>
+
+<ul>
+    <li *ngFor="let user of users">
+        {{user.name}}
+        <button>Update</button>
+        <button (click)="onDelete(user._id)">Remove</button>
+    </li>
+</ul>
+
+
+
